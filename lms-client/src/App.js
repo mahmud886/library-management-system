@@ -13,7 +13,10 @@ import Categories from './components/Pages/Categories/Categories';
 import IssueBooks from './components/Pages/IssueBooks/IssueBooks';
 import ReturnBooks from './components/Pages/ReturnBooks/ReturnBooks';
 import Dashboard from './components/Dashboard/Dashboard';
-import Publishers from './components/Publishers/Publishers';
+import Publishers from './components/Pages/Publishers/Publishers';
+import AddMember from "./components/Pages/Members/AddMember";
+
+export let apiEndpoint = 'http://localhost:8080';
 
 function App() {
     return (
@@ -27,7 +30,11 @@ function App() {
                     <Route path='/sign-up' component={SignUp} />
 
                     <Route path='/dashboard' component={Dashboard} />
+
                     <Route path='/members' component={Members} />
+                    <Route path='/add-member' component={AddMember} />
+
+
                     <Route path='/books' component={Books} />
                     <Route path='/authors' component={Authors} />
                     <Route path='/publishers' component={Publishers} />

@@ -1,0 +1,50 @@
+=================== Member Api =====================
+Post: http://localhost:8080/add-member
+Get: http://localhost:8080/members
+Update: http://localhost:8080/update-member
+Delete: http://localhost:8080/delete-member
+
+=================== Books Api =====================
+
+Post: http://localhost:8080/add-book
+Get: http://localhost:8080/books
+Update: http://localhost:8080/update-book
+Delete: http://localhost:8080/delete-book
+
+=================== Publisher Api =====================
+
+Post: http://localhost:8080/add-publisher
+Get: http://localhost:8080/publishers
+Update: http://localhost:8080/update-publisher
+Delete: http://localhost:8080/delete-publisher
+
+=================== Categories Api =====================
+
+Post: http://localhost:8080/add-categories
+Get: http://localhost:8080/categories
+Update: http://localhost:8080/update-categories
+Delete: http://localhost:8080/delete-categories
+
+
+=================== Issue Books Api =====================
+
+Post: http://localhost:8080/add-issueBook
+Get: http://localhost:8080/issueBooks
+Update: http://localhost:8080/update-issueBook
+Delete: http://localhost:8080/delete-issueBook
+
+
+=================== Return Books Api =====================
+
+Post: http://localhost:8080/add-returnBook
+Get: http://localhost:8080/returnBooks
+Update: http://localhost:8080/update-returnBooks
+Delete: http://localhost:8080/delete-returnBooks
+
+
+=================== Authors Api =====================
+
+Post: http://localhost:8080/add-author
+Get: http://localhost:8080/authors
+Update: http://localhost:8080/update-author
+Delete: http://localhost:8080/delete-author
