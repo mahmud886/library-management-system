@@ -1,8 +1,20 @@
-import React from 'react';
-import { Container, Table,Nav, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import {Button,Row, Card, Col, Container, Nav, Placeholder} from 'react-bootstrap';
+import {Link} from "react-router-dom";
+import {apiEndpoint} from "../../../App";
 
 const Members = () => {
+
+    const [allMembers, setAllMembers] = useState([]);
+
+    // get all members
+    useEffect(() => {
+        axios
+            .get(`${apiEndpoint}/members`)
+            .then((response) => setAllMembers(response.data));
+
+    });
     return (
         <Container>
             <div className='text-center pb-3'>
@@ -11,58 +23,90 @@ const Members = () => {
             <div className="d-flex justify-content-end pb-3">
 
                 <Nav.Link as={Link} to='/add-member'>
-                    <Button className='btn btn-main'>Add Member</Button>
+                    <Button variant={'outline-dark'}>Add Member</Button>
                 </Nav.Link>
             </div>
 
-            <div className="">
-                <Table striped bordered hover size='md' className='text-center'>
-                    <thead>
-                    <tr className='text-dark'>
-                        <th>NO</th>
-                        <th>Member ID</th>
-                        <th>Member Name</th>
-                        <th>Member Email</th>
-                        <th>Member Phone</th>
-                        <th>Member Address</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr className=''>
-                        <td>Nayem</td>
-                        <td>Hello</td>
-                        <td>Hello</td>
-                        <td>Hello</td>
-                        <td>Hello</td>
-                        <td>Hello</td>
-                        <td>
+            <div className='py-3 bg-light rounded shadow-sm '>
+                <Row>
+                    {
+                        allMembers.map((member, index)=> (
+                            <Col md={3} className='pt-3' key={index}>
+                                <Card style={{ width: '18rem' }} className='m-auto bg-white rounded-3 shadow-sm'>
+                                    <Card.Img variant='top' src="https://gravatar.com/avatar/b61783cc329cdeb0612a23809fc0aa92?s=400&d=robohash&r=x" />
+                                    <Card.Body variant='danger' >
+                                        <Placeholder as={Card.text} animation='glow'>
+                                            <div className="d-grid gap-2 py-2">
+                                                <Button size="lg" variant={'danger'}>
+                                                    {member.member_name}
+                                                </Button>
+                                            </div>
 
-                            {/*<button className='btn btn-outline-success btn-md ml-2'*/}
+                                            <p>member ID: {member.member_id}</p>
+                                            <p>Email: {member.member_email} </p>
+                                            <p>Phone: {member.member_phone} </p>
+                                            <p>{member.member_address} </p>
+                                        </Placeholder>
+                                        <div className="d-grid gap-2 py-2">
+                                            <Button variant={"outline-dark"}>View Details</Button>
+                                        </div>
 
-                            {/*        onClick={() => singleEnrolledDetails(id)}>*/}
-                            {/*    DETAILS</button>*/}
-
-
-                            {/*<button className='btn btn-outline-danger btn-md ml-2'*/}
-                            {/*        onClick={()=> props.deleteAdmission(id)}*/}
-                            {/*>*/}
-                            {/*    DELETE</button>*/}
-
-
-                        </td>
-                    </tr>
-                    {/*{*/}
-                    {/*    admissions.length === 0 ? 'No record to display':*/}
-                    {/*        admissions.map((admission, key)=> (*/}
-                    {/*            <EnrolledList admission={admission} key={key}*/}
-                    {/*                          deleteAdmission={deleteAdmission}*/}
-                    {/*            />*/}
-                    {/*        ))*/}
-                    {/*}*/}
-                    </tbody>
-                </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    }
+                </Row>
             </div>
+
+            {/*<div className="">*/}
+            {/*    <Table striped bordered hover size='md' className='text-center'>*/}
+            {/*        <thead>*/}
+            {/*        <tr className='text-dark'>*/}
+            {/*            <th>NO</th>*/}
+            {/*            <th>Member ID</th>*/}
+            {/*            <th>Member Name</th>*/}
+            {/*            <th>Member Email</th>*/}
+            {/*            <th>Member Phone</th>*/}
+            {/*            <th>Member Address</th>*/}
+            {/*            <th>Action</th>*/}
+            {/*        </tr>*/}
+            {/*        </thead>*/}
+            {/*        <tbody>*/}
+            {/*        <tr className=''>*/}
+            {/*            <td>Nayem</td>*/}
+            {/*            <td>Hello</td>*/}
+            {/*            <td>Hello</td>*/}
+            {/*            <td>Hello</td>*/}
+            {/*            <td>Hello</td>*/}
+            {/*            <td>Hello</td>*/}
+            {/*            <td>*/}
+
+            {/*                <button className='btn btn-outline-success btn-md ml-2'*/}
+
+            {/*                        onClick={() => singleEnrolledDetails(id)}>*/}
+            {/*                    DETAILS</button>*/}
+
+
+            {/*                <button className='btn btn-outline-danger btn-md ml-2'*/}
+            {/*                        onClick={()=> props.deleteAdmission(id)}*/}
+            {/*                >*/}
+            {/*                    DELETE</button>*/}
+
+
+            {/*            </td>*/}
+            {/*        </tr>*/}
+            {/*        {*/}
+            {/*            admissions.length === 0 ? 'No record to display':*/}
+            {/*                admissions.map((admission, key)=> (*/}
+            {/*                    <EnrolledList admission={admission} key={key}*/}
+            {/*                                  deleteAdmission={deleteAdmission}*/}
+            {/*                    />*/}
+            {/*                ))*/}
+            {/*        }*/}
+            {/*        </tbody>*/}
+            {/*    </Table>*/}
+            {/*</div>*/}
         </Container>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import { Container, Row, Col, Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Table } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -9,77 +9,67 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import {apiEndpoint} from '../../../App'
-const AddMember = () => {
 
-    const [allMembers, setAllMembers] = useState([]);
+const AddBook = () => {
+    const [allBooks, setAllBooks] = useState([]);
 
-    // Post state
-    const [members, setMembers] = useState({
-        member_id: '',
-        member_name: '',
-        member_email: '',
-        member_phone: '',
-        member_address: '',
+    // Post
+    const [books, setBooks] = useState({
+        book_id: '',
+        book_name: '',
+        authors: '',
+        publisher: '',
+        stock: '',
+        description: ''
     });
-
-
-
     let name, value;
 
-    const handleMemberValues = (event) => {
-        name = event.target.name;
-        value = event.target.value;
-        setMembers({...members, [name]:value});
-    }
+    const handleBooksValues = (e) => {
+        name = e.target.name;
+        value = e.target.value;
+        setBooks({ ...books, [name]: value });
+    };
 
-
-
-    const onSubmitHandler = (event) => {
-        event.preventDefault()
-        console.log(members);
-
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log(books);
         axios
-            .post(`${apiEndpoint}/add-member`, members)
+            .post(`${apiEndpoint}/add-book`, books)
             .then((response) => {
-                alert('Member Data Successfully Store to Database..');
+                alert('Book Successfully Store to Database..');
             })
             .catch((err) => {
                 console.log(err);
             });
 
-        setMembers({
-            member_id: '',
-            member_name: '',
-            member_email: '',
-            member_phone: '',
-            member_address: '',
+        setBooks({
+            book_id: '',
+            book_name: '',
+            authors: '',
+            publisher: '',
+            stock: '',
+            description: ''
         });
-
     };
-
     // get
     useEffect(() => {
         axios
-            .get(`${apiEndpoint}/members`)
-            .then((response) => setAllMembers(response.data));
+            .get(`${apiEndpoint}/books`)
+            .then((response) => setAllBooks(response.data));
         // console.log(allBooks);
     });
 
     // Delete Data
-    const deleteMember = (id) => {
+    const deletebook = (id) => {
         axios
-            .delete(`${apiEndpoint}/delete-member/${id}`)
+            .delete(`${apiEndpoint}/delete-book/${id}`)
             .then((res) => res.data);
     };
-
-
     return (
-        <div>
+        <>
             <Container>
-                <div className="">
-                    <h2 className=' text-center rounded h1'>
-                        Add Member
-                    </h2>
+                <div className='top-header text-center pb-3'>
+                    <h3 className='text-uppercase'>All Library Books</h3>
                 </div>
 
                 {/* Create Notice */}
@@ -87,86 +77,100 @@ const AddMember = () => {
                     <Col md={3}>
                         <div className='shadow-sm bg-white rounded'>
                             <div className='inner__container  px-3 pb-3'>
-                                <h5 className='py-1'>Add Member</h5>
+                                <h5 className='py-1'>Add New Book</h5>
 
                                 {/* Form */}
-                                <Form onSubmit={(event) => onSubmitHandler(event)}>
+                                <Form onSubmit={(e) => onSubmitHandler(e)}>
                                     <Form.Group
                                         className='mb-3'
-                                        controlId='formMemberIDName'>
+                                        controlId='formBookIDName'>
                                         <Form.Label className='text-muted'>
-                                            Member ID
+                                            Book ID
                                         </Form.Label>
                                         <Form.Control
                                             className='bg-light'
                                             type='text'
-                                            placeholder='Enter Member ID'
-                                            name='member_id'
-                                            value={members.member_id}
-                                            onChange={handleMemberValues}
+                                            placeholder='Enter Book ID'
+                                            name='book_id'
+                                            value={books.book_id}
+                                            onChange={handleBooksValues}
                                         />
                                     </Form.Group>
                                     <Form.Group
                                         className='mb-3'
-                                        controlId='formMemberName'>
+                                        controlId='formBookName'>
                                         <Form.Label className='text-muted'>
-                                            Member Name
+                                            Book Name
                                         </Form.Label>
                                         <Form.Control
                                             className='bg-light'
                                             type='text'
-                                            placeholder='Enter Member Name'
-                                            name='member_name'
-                                            value={members.member_name}
-                                            onChange={handleMemberValues}
+                                            placeholder='Enter Book Name'
+                                            name='book_name'
+                                            value={books.book_name}
+                                            onChange={handleBooksValues}
                                         />
                                     </Form.Group>
                                     <Form.Group
                                         className='mb-3'
-                                        controlId='formMemberEmail'>
+                                        controlId='formAuthorName'>
                                         <Form.Label className='text-muted'>
-                                            Member Email
+                                            Author's Name
                                         </Form.Label>
                                         <Form.Control
                                             className='bg-light'
                                             type='text'
-                                            placeholder='Enter Member Email'
-                                            name='member_email'
-                                            value={members.member_email}
-                                            onChange={handleMemberValues}
+                                            placeholder='Enter Authors Name'
+                                            name='authors'
+                                            value={books.authors}
+                                            onChange={handleBooksValues}
                                         />
                                     </Form.Group>
                                     <Form.Group
                                         className='mb-3 '
-                                        controlId='formMemberPhone'>
+                                        controlId='formPublisherName'>
                                         <Form.Label className='text-muted'>
-                                            Member Phone
+                                            Publisher Name
                                         </Form.Label>
                                         <Form.Control
                                             className='bg-light'
                                             type='text'
-                                            placeholder='Enter Member Phone'
-                                            name='member_phone'
-                                            value={members.member_phone}
-                                            onChange={handleMemberValues}
+                                            placeholder='Enter Publisher Name'
+                                            name='publisher'
+                                            value={books.publisher}
+                                            onChange={handleBooksValues}
                                         />
                                     </Form.Group>
                                     <Form.Group
                                         className='mb-3 '
-                                        controlId='formMemberAddress'>
+                                        controlId='formBookAvailable'>
                                         <Form.Label className='text-muted'>
-                                            Member Address
+                                            Book Available
                                         </Form.Label>
                                         <Form.Control
                                             className='bg-light'
                                             type='text'
-                                            placeholder='Enter Member Address'
-                                            name='member_address'
-                                            value={members.member_address}
-                                            onChange={handleMemberValues}
+                                            placeholder='Enter Book Available'
+                                            name='stock'
+                                            value={books.stock}
+                                            onChange={handleBooksValues}
                                         />
                                     </Form.Group>
-
+                                    <Form.Group
+                                        className='mb-3 '
+                                        controlId='formPublishedYear'>
+                                        <Form.Label className='text-muted'>
+                                            Book Short Description
+                                        </Form.Label>
+                                        <Form.Control
+                                            className='bg-light'
+                                            type='text'
+                                            placeholder='Enter Book Short Bio'
+                                            name='description'
+                                            value={books.description}
+                                            onChange={handleBooksValues}
+                                        />
+                                    </Form.Group>
 
                                     <button
                                         className='btn btn-outline-success btn-md px-4'
@@ -178,7 +182,7 @@ const AddMember = () => {
                         </div>
                     </Col>
 
-                     {/*Notice Board */}
+                    {/* Notice Board */}
                     <Col md={9}>
                         <div className='shadow-sm bg-white rounded'>
                             <div className='inner__container px-3 py-3 '>
@@ -194,24 +198,26 @@ const AddMember = () => {
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Member ID</th>
-                                        <th>Member Name</th>
-                                        <th>Member Email</th>
-                                        <th>Member Phone</th>
-                                        <th>Member Address</th>
+                                        <th>Book ID</th>
+                                        <th>Book Name</th>
+                                        <th>Authors</th>
+                                        <th>Publisher</th>
+                                        <th>Stock</th>
+                                        <th>Description</th>
+
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-                                    {allMembers.map((member, index) => (
+                                    {allBooks.map((book, index) => (
                                         <tbody>
                                         <tr>
                                             <td>{index + 1}</td>
-                                            <td>{member.member_id}</td>
-                                            <td>{member.member_name}</td>
-                                            <td>{member.member_email}</td>
-                                            <td>{member.member_phone}</td>
-                                            <td>{member.member_address}</td>
-
+                                            <td>{book.book_id}</td>
+                                            <td>{book.book_name}</td>
+                                            <td>{book.authors}</td>
+                                            <td>{book.publisher}</td>
+                                            <td>{book.stock}</td>
+                                            <td>{book.description}</td>
 
                                             <td>
                                                 <p>
@@ -228,14 +234,14 @@ const AddMember = () => {
                                                                 onClick={() => {
                                                                     const confirmDelete =
                                                                         window.confirm(
-                                                                            `Do you want to delete ${member.member_name}`
+                                                                            `Do you want to delete ${books.book_name}`
                                                                         );
                                                                     if (
                                                                         confirmDelete ===
                                                                         true
                                                                     ) {
-                                                                        deleteMember(
-                                                                            member._id
+                                                                        deletebook(
+                                                                            book._id
                                                                         );
                                                                     }
                                                                 }}>
@@ -256,10 +262,12 @@ const AddMember = () => {
                         </div>
                     </Col>
                 </Row>
-
             </Container>
-        </div>
+        </>
+
+
+
     );
 };
 
-export default AddMember;
+export default AddBook;

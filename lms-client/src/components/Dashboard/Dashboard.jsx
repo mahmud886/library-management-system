@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Container,
     Row,
@@ -7,11 +7,36 @@ import {
     Placeholder,
     Button,
 } from 'react-bootstrap';
+import axios from "axios";
+import {apiEndpoint} from "../../App";
 
 const Dashboard = () => {
+
+    const [allBooks, setAllBooks] = useState([]);
+    const [allMembers, setAllMembers] = useState([]);
+
+    // get all books
+    useEffect(() => {
+        axios
+            .get(`${apiEndpoint}/books`)
+            .then((response) => setAllBooks(response.data));
+
+    });
+
+
+
+
+    // get all members
+    useEffect(() => {
+        axios
+            .get(`${apiEndpoint}/members`)
+            .then((response) => setAllMembers(response.data));
+
+    });
+
     return (
         <Container>
-            <div className='d-flex justify-content-center align-items-center'>
+            <div className='d-flex justify-content-center align-items-center py-3'>
                 <Row>
                     <Col className='pt-3'>
                         <Card style={{ width: '18rem' }} className='bg-primary'>
@@ -124,6 +149,75 @@ const Dashboard = () => {
                             </Card.Body>
                         </Card>
                     </Col>
+                </Row>
+            </div>
+
+            {/*All Book Is Here*/}
+            <div className='d-flex justify-content-end'>
+                <div className='bg-light'>
+                    <h5>Library Members</h5>
+                </div>
+            </div>
+            <div className='py-3 bg-light rounded shadow-sm '>
+                <Row>
+                    {
+                        allBooks.map((book, index)=> (
+                            <Col md={3} className='pt-3' key={index}>
+                                <Card style={{ width: '18rem' }} className='m-auto bg-white rounded-3 shadow-sm'>
+                                    <Card.Img variant='top' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80" />
+                                    <Card.Body variant='danger' >
+                                        <Placeholder as={Card.text} animation='glow'>
+                                            <p className='text-center bg-info py-2 rounded'>{book.book_name}</p>
+                                            <p>Book ID:{book.book_id}</p>
+                                            <p>Author: {book.authors} </p>
+                                            <p>Stock: {book.stock} </p>
+                                            <p>{book.description} </p>
+                                        </Placeholder>
+
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    }
+                </Row>
+            </div>
+
+        {/*    All Members are Here*/}
+            <div className='d-flex justify-content-end'>
+                <div className='bg-light'>
+                    <h5>Library Book</h5>
+                </div>
+            </div>
+
+            <div className='py-3 bg-light rounded shadow-sm '>
+                <Row>
+                    {
+                        allMembers.map((member, index)=> (
+                            <Col md={3} className='pt-3' key={index}>
+                                <Card style={{ width: '18rem' }} className='m-auto bg-white rounded-3 shadow-sm'>
+                                    <Card.Img variant='top' src="https://gravatar.com/avatar/b61783cc329cdeb0612a23809fc0aa92?s=400&d=robohash&r=x" />
+                                    <Card.Body variant='danger' >
+                                        <Placeholder as={Card.Text} animation='glow'>
+                                            <div className="d-grid gap-2 py-2">
+                                                <Button size="lg" variant={'danger'}>
+                                                    {member.member_name}
+                                                </Button>
+                                            </div>
+
+                                            <p>member ID: {member.member_id}</p>
+                                            <p>Email: {member.member_email} </p>
+                                            <p>Phone: {member.member_phone} </p>
+                                            <p>{member.member_address} </p>
+                                        </Placeholder>
+                                        <div className="d-grid gap-2 py-2">
+                                            <Button variant={"outline-dark"}>View Details</Button>
+                                        </div>
+
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    }
                 </Row>
             </div>
         </Container>

@@ -15,6 +15,7 @@ import ReturnBooks from './components/Pages/ReturnBooks/ReturnBooks';
 import Dashboard from './components/Dashboard/Dashboard';
 import Publishers from './components/Pages/Publishers/Publishers';
 import AddMember from "./components/Pages/Members/AddMember";
+import AddBook from "./components/Pages/Books/AddBook";
 
 export let apiEndpoint = 'http://localhost:8080';
 
@@ -36,6 +37,7 @@ function App() {
 
 
                     <Route path='/books' component={Books} />
+                    <Route path='/add-book' component={AddBook} />
                     <Route path='/authors' component={Authors} />
                     <Route path='/publishers' component={Publishers} />
                     <Route path='/categories' component={Categories} />
