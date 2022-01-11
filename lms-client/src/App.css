@@ -1,11 +1,24 @@
-/* .banner {
-    background: url('../src/assets/images/banner.jpg');
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-} */
+.body__background{
+    background-color: #212734!important;
+}
+.nav__background{
+    background-color: #31394C!important;
+}
+.text__color__main {
+    background-color: #FFFFFF!important;
+}
+
+.table {
+    background-color: #31394C!important;
+
+    /*color: 	#ffffff!important;*/
+    text-align: center;
+    max-width: 90%!important;
+    max-height: 550px;
+    overflow-y: scroll!important;
+    display: block;
+    table-layout: fixed;
+}
 
 .App {
     text-align: center;

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 const Menubar = () => {
     return (
-        <div className='pb-5'>
-            <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+        <div className='pb-3'>
+            <Navbar collapseOnSelect expand='lg'  variant='dark' className='nav__background'>
                 <Container>
                     <Navbar.Brand as={Link} to='/'>
                         LMS

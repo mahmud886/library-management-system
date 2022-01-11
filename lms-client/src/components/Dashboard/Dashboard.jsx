@@ -39,9 +39,9 @@ const Dashboard = () => {
             <div className='d-flex justify-content-center align-items-center py-3'>
                 <Row>
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-primary'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
-                            <Card.Body variant='danger'>
+                            <Card.Body variant='danger' className=''>
                                 <Placeholder as={Card.Title} animation='glow'>
                                     Total Members
                                 </Placeholder>
@@ -54,7 +54,7 @@ const Dashboard = () => {
                     <Col className='pt-3'>
                         <Card
                             style={{ width: '18rem' }}
-                            className='bg-secondary'>
+                            className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -67,7 +67,7 @@ const Dashboard = () => {
                         </Card>
                     </Col>
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-success'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -81,7 +81,7 @@ const Dashboard = () => {
                     </Col>
 
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-danger'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -95,7 +95,7 @@ const Dashboard = () => {
                     </Col>
 
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-warning'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -109,7 +109,7 @@ const Dashboard = () => {
                     </Col>
 
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-info'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -122,7 +122,7 @@ const Dashboard = () => {
                         </Card>
                     </Col>
                     <Col className='pt-3'>
-                        <Card style={{ width: '18rem' }} className='bg-light'>
+                        <Card style={{ width: '18rem' }} className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -137,7 +137,7 @@ const Dashboard = () => {
                     <Col className='pt-3'>
                         <Card
                             style={{ width: '18rem' }}
-                            className='bg-dark text-light'>
+                            className='nav__background text-white'>
                             {/* <Card.Img variant='top' src='holder.js/100px180' /> */}
                             <Card.Body>
                                 <Placeholder as={Card.Title} animation='glow'>
@@ -153,71 +153,98 @@ const Dashboard = () => {
             </div>
 
             {/*All Book Is Here*/}
+            <hr className='text-white-50'/>
             <div className='d-flex justify-content-end'>
-                <div className='bg-light'>
+                <div className='text-white-50'>
                     <h5>Library Members</h5>
                 </div>
             </div>
-            <div className='py-3 bg-light rounded shadow-sm '>
+            <div className='py-3 nav__background rounded shadow-sm '>
                 <Row>
-                    {
-                        allBooks.map((book, index)=> (
-                            <Col md={3} className='pt-3' key={index}>
-                                <Card style={{ width: '18rem' }} className='m-auto bg-white rounded-3 shadow-sm'>
-                                    <Card.Img variant='top' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80" />
-                                    <Card.Body variant='danger' >
-                                        <Placeholder as={Card.text} animation='glow'>
-                                            <p className='text-center bg-info py-2 rounded'>{book.book_name}</p>
-                                            <p>Book ID:{book.book_id}</p>
-                                            <p>Author: {book.authors} </p>
-                                            <p>Stock: {book.stock} </p>
-                                            <p>{book.description} </p>
-                                        </Placeholder>
-
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))
-                    }
+                    {allBooks.map((book, index) => (
+                        <Col md={3} className='pt-3' key={index}>
+                            <Card
+                                style={{ width: '18rem' }}
+                                className='m-auto nav__background rounded-3 shadow-sm'>
+                                <Card.Img
+                                    variant='top'
+                                    src='https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80'
+                                />
+                                <Card.Body variant='danger'>
+                                    <Placeholder
+                                        className='text-white-50'
+                                        as={Card.text}
+                                        animation='glow'>
+                                        <div className='d-grid gap-2 py-2'>
+                                            <Button
+                                                className='rounded-pill '
+                                                size='lg'
+                                                variant={'outline-dark text-white-50'}>
+                                                {book.book_name}
+                                            </Button>
+                                        </div>
+                                        <p>Book ID:{book.book_id}</p>
+                                        <p>Author: {book.authors} </p>
+                                        <p>Stock: {book.stock} </p>
+                                        <p>{book.description} </p>
+                                    </Placeholder>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
             </div>
 
         {/*    All Members are Here*/}
-            <div className='d-flex justify-content-end'>
-                <div className='bg-light'>
+            <hr className='text-white-50'/>
+            <div className='d-flex justify-content-end pt-2'>
+                <div className='text-white-50'>
                     <h5>Library Book</h5>
                 </div>
             </div>
 
-            <div className='py-3 bg-light rounded shadow-sm '>
+            <div className=' text-white rounded shadow-sm '>
                 <Row>
-                    {
-                        allMembers.map((member, index)=> (
-                            <Col md={3} className='pt-3' key={index}>
-                                <Card style={{ width: '18rem' }} className='m-auto bg-white rounded-3 shadow-sm'>
-                                    <Card.Img variant='top' src="https://gravatar.com/avatar/b61783cc329cdeb0612a23809fc0aa92?s=400&d=robohash&r=x" />
-                                    <Card.Body variant='danger' >
-                                        <Placeholder as={Card.Text} animation='glow'>
-                                            <div className="d-grid gap-2 py-2">
-                                                <Button size="lg" variant={'danger'}>
-                                                    {member.member_name}
-                                                </Button>
-                                            </div>
+                    {allMembers.map((member, index) => (
+                        <Col md={3} className='pt-3' key={index}>
+                            <Card
+                                style={{ width: '18rem' }}
+                                className='m-auto nav__background rounded-3 shadow-sm'>
+                                <Card.Img
 
-                                            <p>member ID: {member.member_id}</p>
-                                            <p>Email: {member.member_email} </p>
-                                            <p>Phone: {member.member_phone} </p>
-                                            <p>{member.member_address} </p>
-                                        </Placeholder>
-                                        <div className="d-grid gap-2 py-2">
-                                            <Button variant={"outline-dark"}>View Details</Button>
+                                    height='150px'
+                                    width='150px'
+                                    variant='top'
+                                    src='https://gravatar.com/avatar/b61783cc329cdeb0612a23809fc0aa92?s=400&d=robohash&r=x'
+                                />
+                                <Card.Body variant='danger'>
+                                    <Placeholder
+                                        className='text-white-50'
+                                        as={Card.text}
+                                        animation='glow'>
+                                        <div className='d-grid gap-2 py-2'>
+                                            <Button
+                                                className='rounded-pill '
+                                                size='lg'
+                                                variant={'outline-dark text-white-50'}>
+                                                {member.member_name}
+                                            </Button>
                                         </div>
 
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))
-                    }
+                                        <p>member ID: {member.member_id}</p>
+                                        <p>Email: {member.member_email} </p>
+                                        <p>Phone: {member.member_phone} </p>
+                                        <p>{member.member_address} </p>
+                                    </Placeholder>
+                                    <div className='d-grid gap-2 py-2'>
+                                        <Button className='rounded-pill text-white-50' size='lg' variant={'outline-dark'}>
+                                            View Details
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
             </div>
         </Container>

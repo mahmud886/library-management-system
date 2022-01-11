@@ -8,9 +8,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import {apiEndpoint} from '../../../App'
+import { apiEndpoint } from '../../../App';
 const AddMember = () => {
-
     const [allMembers, setAllMembers] = useState([]);
 
     // Post state
@@ -22,20 +21,16 @@ const AddMember = () => {
         member_address: '',
     });
 
-
-
     let name, value;
 
     const handleMemberValues = (event) => {
         name = event.target.name;
         value = event.target.value;
-        setMembers({...members, [name]:value});
-    }
-
-
+        setMembers({ ...members, [name]: value });
+    };
 
     const onSubmitHandler = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         console.log(members);
 
         axios
@@ -54,7 +49,6 @@ const AddMember = () => {
             member_phone: '',
             member_address: '',
         });
-
     };
 
     // get
@@ -72,25 +66,25 @@ const AddMember = () => {
             .then((res) => res.data);
     };
 
-
     return (
-        <div>
-            <Container>
-                <div className="">
-                    <h2 className=' text-center rounded h1'>
-                        Add Member
-                    </h2>
+        <div >
+            <Container fluid>
+                <div className='text-center pb-3'>
+                    <h2 className='text-uppercase text-white-50'>Add Member</h2>
                 </div>
 
                 {/* Create Notice */}
-                <Row>
+                <Row >
                     <Col md={3}>
-                        <div className='shadow-sm bg-white rounded'>
+                        <div className='shadow-lg nav__background rounded'>
                             <div className='inner__container  px-3 pb-3'>
-                                <h5 className='py-1'>Add Member</h5>
+                                <h5 className='py-1 text-center text-uppercase text-white-50'>Add Member</h5>
 
                                 {/* Form */}
-                                <Form onSubmit={(event) => onSubmitHandler(event)}>
+                                <Form
+                                    onSubmit={(event) =>
+                                        onSubmitHandler(event)
+                                    }>
                                     <Form.Group
                                         className='mb-3'
                                         controlId='formMemberIDName'>
@@ -98,7 +92,7 @@ const AddMember = () => {
                                             Member ID
                                         </Form.Label>
                                         <Form.Control
-                                            className='bg-light'
+                                            className='nav__background rounded-pill'
                                             type='text'
                                             placeholder='Enter Member ID'
                                             name='member_id'
@@ -113,7 +107,7 @@ const AddMember = () => {
                                             Member Name
                                         </Form.Label>
                                         <Form.Control
-                                            className='bg-light'
+                                            className='nav__background rounded-pill'
                                             type='text'
                                             placeholder='Enter Member Name'
                                             name='member_name'
@@ -128,7 +122,7 @@ const AddMember = () => {
                                             Member Email
                                         </Form.Label>
                                         <Form.Control
-                                            className='bg-light'
+                                            className='nav__background rounded-pill'
                                             type='text'
                                             placeholder='Enter Member Email'
                                             name='member_email'
@@ -143,7 +137,7 @@ const AddMember = () => {
                                             Member Phone
                                         </Form.Label>
                                         <Form.Control
-                                            className='bg-light'
+                                            className='nav__background rounded-pill'
                                             type='text'
                                             placeholder='Enter Member Phone'
                                             name='member_phone'
@@ -158,7 +152,7 @@ const AddMember = () => {
                                             Member Address
                                         </Form.Label>
                                         <Form.Control
-                                            className='bg-light'
+                                            className='nav__background rounded-pill'
                                             type='text'
                                             placeholder='Enter Member Address'
                                             name='member_address'
@@ -167,54 +161,56 @@ const AddMember = () => {
                                         />
                                     </Form.Group>
 
+                                    <div className='d-grid gap-2 py-2'>
+                                        <Button className='rounded-pill text-white-50'
+                                                size='lg'
+                                                variant={'outline-dark'}
+                                                type={'submit'}
+                                        >
+                                            Save data to Database
+                                        </Button>
+                                    </div>
 
-                                    <button
-                                        className='btn btn-outline-success btn-md px-4'
-                                        type='submit'>
-                                        Save
-                                    </button>
+
                                 </Form>
                             </div>
                         </div>
                     </Col>
 
-                     {/*Notice Board */}
+                    {/*Notice Board */}
                     <Col md={9}>
-                        <div className='shadow-sm bg-white rounded'>
-                            <div className='inner__container px-3 py-3 '>
-                                <h5 className='py-3'>All Books</h5>
-
+                        <div className='shadow-lg rounded'>
+                            <div className='inner__container'>
                                 <Table
-                                    striped
                                     bordered
                                     rounded
                                     hover
                                     size='lg'
-                                    className='text-center'>
+                                    className='text-center text-white-50'>
+                                    <h5 className='text-uppercase pb-3 text-center'>All Books</h5>
                                     <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Member ID</th>
-                                        <th>Member Name</th>
-                                        <th>Member Email</th>
-                                        <th>Member Phone</th>
-                                        <th>Member Address</th>
-                                        <th>Action</th>
-                                    </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Member ID</th>
+                                            <th>Member Name</th>
+                                            <th>Member Email</th>
+                                            <th>Member Phone</th>
+                                            <th>Member Address</th>
+                                            <th>Action</th>
+                                        </tr>
                                     </thead>
                                     {allMembers.map((member, index) => (
                                         <tbody>
-                                        <tr>
-                                            <td>{index + 1}</td>
-                                            <td>{member.member_id}</td>
-                                            <td>{member.member_name}</td>
-                                            <td>{member.member_email}</td>
-                                            <td>{member.member_phone}</td>
-                                            <td>{member.member_address}</td>
+                                            <tr>
+                                                <td>{index + 1}</td>
+                                                <td>{member.member_id}</td>
+                                                <td>{member.member_name}</td>
+                                                <td>{member.member_email}</td>
+                                                <td>{member.member_phone}</td>
+                                                <td>{member.member_address}</td>
 
-
-                                            <td>
-                                                <p>
+                                                <td>
+                                                    <p>
                                                         <span>
                                                             <button className='btn'>
                                                                 <FontAwesomeIcon
@@ -246,9 +242,9 @@ const AddMember = () => {
                                                                 />
                                                             </button>
                                                         </span>
-                                                </p>
-                                            </td>
-                                        </tr>
+                                                    </p>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     ))}
                                 </Table>
@@ -256,7 +252,6 @@ const AddMember = () => {
                         </div>
                     </Col>
                 </Row>
-
             </Container>
         </div>
     );
