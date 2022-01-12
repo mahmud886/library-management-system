@@ -16,12 +16,13 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Publishers from './components/Pages/Publishers/Publishers';
 import AddMember from "./components/Pages/Members/AddMember";
 import AddBook from "./components/Pages/Books/AddBook";
+import AuthProvider from './components/contextApi/AuthProvider';
 
 export let apiEndpoint = 'http://localhost:8080';
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <Router>
                 <Menubar />
                 <Switch>
@@ -45,7 +46,7 @@ function App() {
                     <Route path='/return-books' component={ReturnBooks} />
                 </Switch>
             </Router>
-        </>
+            </AuthProvider>
     );
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import useAuth from '../Hooks/useAuth/useAuth';
 
 const Menubar = () => {
+    const {user,logOut}=useAuth()
     return (
         <div className='pb-3'>
             <Navbar collapseOnSelect expand='lg'  variant='dark' className='nav__background'>
@@ -40,9 +42,18 @@ const Menubar = () => {
                             </Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link as={Link} to='/sign-in'>
+                            {
+                                user?.email? 
+                                <span style={{color:'#fff'}}>
+                                      <span className='me-3'>{user.displayName}</span>
+                                    <button onClick={logOut}>Log Out</button>
+                                </span>
+                                :
+                                <Nav.Link as={Link} to='/sign-in'>
                                 LOGIN
                             </Nav.Link>
+                            }
+                           
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

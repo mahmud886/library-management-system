@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import useAuth from '../Hooks/useAuth/useAuth';
+// import { useLocation} from 'react-router-dom/cjs/react-router-dom.min';
 
 function Copyright(props) {
     return (
@@ -34,14 +36,30 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+    const [loginData, setLoginData]= React.useState()
+    const { user,passwordLogin } = useAuth()
+    // const location = useLocation();
+    // const history = useNavigate();
+
+    const handleOnChange = e =>{
+        const field = e.target.name;
+        const value = e.target.value;
+        const newLoginData = {...loginData}
+        newLoginData[field]=value;
+        setLoginData(newLoginData)
+       
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // const data = new FormData(event.currentTarget);
+        // // eslint-disable-next-line no-console
+        // console.log({
+        //     email: data.get('email'),
+        //     password: data.get('password'),
+        // });
+        passwordLogin(loginData.email, loginData.password);
+        console.log(user);
+
     };
 
     return (
@@ -78,6 +96,7 @@ export default function SignIn() {
                             label='Email Address'
                             name='email'
                             autoComplete='email'
+                            onChange={handleOnChange}
                             autoFocus
                         />
                         <TextField
@@ -88,6 +107,7 @@ export default function SignIn() {
                             label='Password'
                             type='password'
                             id='password'
+                            onChange={handleOnChange}
                             autoComplete='current-password'
                         />
                         <FormControlLabel
